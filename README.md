@@ -2,6 +2,8 @@
 
 This project was inspired by the idea to use an existing SMA Sunny Home Manager 2.0 (SHM) as energy meter for a Victron Energy GX device, e.g. Venus OS running on a Raspberry Pi.
 
+Sean Mitchell realized a very similar project in Go https://github.com/mitchese/shm-et340, but I wanted to have this code in Python.
+
 This Python-Code is based on https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py and translated the SHM data via speedwire to the VE.bus.
 
 Via speedwire communication all data are read from the SHM and translated to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed. Inside the Venus OS menu the SHM device is visible, e.g. like this:
