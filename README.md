@@ -11,6 +11,7 @@ Via speedwire communication all data are read from the SHM and translated to the
 ![grafik](https://user-images.githubusercontent.com/99689771/156237997-9427df11-6b66-4b99-82a3-6f5dbfb0c146.png)
 
 On VenusOS it looks like this:
+
 Phase      ------- L1 ------ ------- L2 ------ ------- L3 ------<br>
 Power         89.8 (21.4.0)     94.6 (41.4.0)    346.7 (61.4.0) W<br>
 Current      12.84 (31.4.0)     7.22 (51.4.0)    16.10 (71.4.0) A<br>
