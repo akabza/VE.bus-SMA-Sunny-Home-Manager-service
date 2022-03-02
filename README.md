@@ -20,4 +20,4 @@ Energy +    XX12.5 (21.8.0)   XX38.1 (41.8.0)   XX27.9 (61.8.0) kWh<br>
 Energy -    XX02.2 (22.8.0)   XX22.4 (42.8.0)   XX08.4 (62.8.0) kWh<br>
 INFO:root:House Consumption: 531.1
 
-OPEN ISSUE: I don´t know how to get this data from DeviceInstance 30 (which is used here!) to DeviceInstance 100. Therefore grid data are NOT vsible in the Venus OS main screen, and also not available for ESS!!! I need support here!
+OPEN ISSUE: I don´t know how to get this data from DeviceInstance 30 (which is used here!) "translated" to DeviceInstance 100. Therefore grid data are NOT vsible in the Venus OS main screen, and also not available for ESS!!! I need support here!
