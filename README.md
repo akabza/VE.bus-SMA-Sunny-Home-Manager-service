@@ -4,7 +4,7 @@ This project was inspired by the idea to use an existing SMA Sunny Home Manager 
 
 Sean Mitchell realized a very similar project in Go https://github.com/mitchese/shm-et340, but I wanted to have this code in Python.
 
-This Python-Code is based on https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py and translated the SHM data via speedwire to the VE.bus.
+This Python-Code is based on https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py and translated the SHM data via speedwire to the VE.bus. More information on D-Bus API definition here: https://github.com/victronenergy/venus/wiki/dbus-api
 
 Via speedwire communication all data are read from the SHM and translated to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed. Inside the Venus OS menu the SHM device is visible, e.g. like this:
 
@@ -20,4 +20,4 @@ Energy +    XX12.5 (21.8.0)   XX38.1 (41.8.0)   XX27.9 (61.8.0) kWh<br>
 Energy -    XX02.2 (22.8.0)   XX22.4 (42.8.0)   XX08.4 (62.8.0) kWh<br>
 INFO:root:House Consumption: 531.1
 
-OPEN ISSUE: The grid data are not visible in the Venus OS main screen, and also not used for an ESS!!! I need support here!
+OPEN ISSUE: I don´t know how to get this data from DeviceInstance 30 (which is used here!) to DeviceInstance 100. Therefore grid data are NOT vsible in the Venus OS main screen, and also not available for ESS!!! I need support here!
