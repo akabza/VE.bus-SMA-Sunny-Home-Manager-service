@@ -11,7 +11,9 @@ SMA PV converters are supported by Venus OS and automtically visible in the Venu
 
 To install an AC connected electric energy storage (ESS) with VE components, an Energy Meter is required. Unfurtunately the SMA Energy Meter called SunnyHomeManager 2.0 (SHM) is not supported by Venus OS. This Python code allows to use the data from an existing SMA SHM within Venus OS.
 
-Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
+Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. You need to establish root access to Venus OS first, see https://www.victronenergy.com/live/ccgx:root_access.
+
+As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
 
 The measured electric power on the individual three phases are visible on the Venus OS main screen!
