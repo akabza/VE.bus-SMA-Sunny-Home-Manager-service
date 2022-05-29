@@ -9,9 +9,12 @@ This Python-Code is based on https://github.com/victronenergy/velib_python/blob/
 SMA PV converters are supported by Venus OS and automtically visible in the Venus OS main screen, e.g. like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/170887647-da0df145-88f0-4e5a-af75-35568bd16417.png)
 
+To install an AC connected electric energy storage (ESS) with VE components, an Energy Meter is required. Unfurtunately the SMA Energy Meter called SunnyHomeManager 2.0 (SHM) is not supported by Venus OS. This Python code allows to use the data from an existing SMA SHM within Venus OS.
 
+Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. Inside the Venus OS menu the SHM device is visible, e.g. like this:
+![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
 
-Via speedwire communication all data are read from the SHM and translated to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. Inside the Venus OS menu the SHM device is visible, e.g. like this:
+The measured electric power on the individual three phases are visible on the Venus OS main screen, e.g. like this:
 
 
 
