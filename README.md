@@ -18,7 +18,7 @@ As soon as this Python code is running, the SMA SHM is listed in the Venus OS De
 
 The measured electric power on the individual three phases are visible on the Venus OS main screen!
 
-On Venus OS it looks like this (OBIS id in brackets):
+On Venus OS console the output of ths Python code may look like this (OBIS id in brackets):
 
 Phase      ------- L1 ------ ------- L2 ------ ------- L3 ------<br>
 Power         89.8 (21.4.0)     94.6 (41.4.0)    346.7 (61.4.0) W<br>
