@@ -11,14 +11,12 @@ SMA PV converters are supported by Venus OS and automtically visible in the Venu
 
 To install an AC connected electric energy storage (ESS) with VE components, an Energy Meter is required. Unfurtunately the SMA Energy Meter called SunnyHomeManager 2.0 (SHM) is not supported by Venus OS. This Python code allows to use the data from an existing SMA SHM within Venus OS.
 
-Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. Inside the Venus OS menu the SHM device is visible, e.g. like this:
+Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
 
-The measured electric power on the individual three phases are visible on the Venus OS main screen, e.g. like this:
+The measured electric power on the individual three phases are visible on the Venus OS main screen!
 
-
-
-On VenusOS it looks like this (OBIS id in brackets):
+On Venus OS it looks like this (OBIS id in brackets):
 
 Phase      ------- L1 ------ ------- L2 ------ ------- L3 ------<br>
 Power         89.8 (21.4.0)     94.6 (41.4.0)    346.7 (61.4.0) W<br>
@@ -27,5 +25,3 @@ Voltage    231.529 (32.4.0)  232.207 (52.4.0)  232.865 (72.4.0) V<br>
 Energy +    XX12.5 (21.8.0)   XX38.1 (41.8.0)   XX27.9 (61.8.0) kWh<br>
 Energy -    XX02.2 (22.8.0)   XX22.4 (42.8.0)   XX08.4 (62.8.0) kWh<br>
 INFO:root:House Consumption: 531.1
-
-OPEN ISSUE: I don´t know how to get this data from DeviceInstance 30 (which is used here!) "translated" to DeviceInstance 100. Therefore grid data are NOT vsible in the Venus OS main screen, and also not available for ESS!!! I need support here!
