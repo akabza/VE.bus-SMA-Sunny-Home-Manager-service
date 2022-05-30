@@ -17,6 +17,8 @@ Via speedwire communication all data are read from the SHM and transfered to the
 As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
 
+![grafik](https://user-images.githubusercontent.com/99689771/171054562-928e803c-028d-467d-8895-cd2f3e4f181d.png)
+
 The measured electric power on the individual three phases are visible on the Venus OS main screen!
 
 On Venus OS console the output of the Python code may look like this (OBIS id in brackets):
@@ -28,3 +30,6 @@ Voltage    231.529 (32.4.0)  232.207 (52.4.0)  232.865 (72.4.0) V<br>
 Energy +    XX12.5 (21.8.0)   XX38.1 (41.8.0)   XX27.9 (61.8.0) kWh<br>
 Energy -    XX02.2 (22.8.0)   XX22.4 (42.8.0)   XX08.4 (62.8.0) kWh<br>
 INFO:root:House Consumption: 531.1
+
+OPEN ISSUE:
+I still don´t know how to handle the physical units like Volt, Ampere or Watt. For all values on the VE.dbus units are allowed, but not for the power values of L1, L2, and L3. If I add the unit Watt here, this code does not work any more. Any idea how to solve this???
