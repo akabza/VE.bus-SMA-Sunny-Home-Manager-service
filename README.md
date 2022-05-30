@@ -7,7 +7,8 @@ Sean Mitchell realized a very similar project in Go https://github.com/mitchese/
 This Python-Code is based on https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py and translates the SHM data received via speedwire to the VE.bus. More information on D-Bus API definition here: https://github.com/victronenergy/venus/wiki/dbus-api
 
 SMA PV converters are supported by Venus OS and automtically visible in the Venus OS main screen, e.g. like this:
-![grafik](https://user-images.githubusercontent.com/99689771/170887647-da0df145-88f0-4e5a-af75-35568bd16417.png)
+![2022-05-30_Venus_OS_Test](https://user-images.githubusercontent.com/99689771/171047952-95c60e9f-fc03-44d5-b87f-5d3e2942a8ad.png)
+
 
 To install an AC connected electric energy storage (ESS) with VE components, an Energy Meter is required. Unfurtunately the SMA Energy Meter called SunnyHomeManager 2.0 (SHM) is not supported by Venus OS. This Python code allows to use the data from an existing SMA SHM within Venus OS.
 
