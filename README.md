@@ -24,7 +24,11 @@ Enter the IP of your Respberry Pi running Venus OS, then you see this screen fir
 Second, you need to establish root access to Venus OS first, see https://www.victronenergy.com/live/ccgx:root_access. If this was successful, you can directly work with the terminal, which may look like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/172068413-b32dc07e-ddc8-41b7-a9d0-e18b993ee456.png)
 
-Third, you need to copy this Python code to your Raspberry Pi running Venus OS and run this Python code.
+Third, you may want to scan for an existing PV inverter (or any other existing harware). Go to Settings -> PV inverter -> Scan. If this was successful, your PV inverter is visible on the Venus OS device list.
+
+Forth, you need to copy this Python code to your Raspberry Pi running Venus OS. Also copy vedbus.py and ve_utils.py from this link: https://github.com/victronenergy/velib_python into your (roots) home directory /root/home. 
+
+Fifth, start and test this Python code. 
 
 ## How it works
 
