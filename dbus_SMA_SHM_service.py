@@ -274,7 +274,7 @@ def main():
     DBusGMainLoop(set_as_default=True)
 
     pvac_output = DbusDummyService(
-        servicename='com.victronenergy.grid.SMAHomeManager',   # add what you want here, but not just 'com.victronenergy.grid', also 'com.victronenergy.grid.X' works
+        servicename='com.victronenergy.grid.cgwacs_ttyUSB0_di30_mb1',
         deviceinstance=0,
         paths={
         })
