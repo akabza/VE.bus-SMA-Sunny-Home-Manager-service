@@ -1,5 +1,9 @@
 # Victron Energy VE.bus SMA Sunny Home Manager service
 
+## Attention
+
+Work in progress: This Python code was NOT tested with any Victron Energe hardware at all! Use this code only for testing and on your own risk!!! 
+
 ## Overview
 
 This project was inspired by the idea to use an existing SMA Sunny Home Manager 2.0 (SHM) as energy meter for a Victron Energy GX device, e.g. Venus OS running on a Raspberry Pi.
