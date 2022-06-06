@@ -10,6 +10,7 @@ Virtual Device to read SMA Sunny Home Manager 2.0 and use this as Energy Meter f
 2022-03-01  minor modifications
 2022-04-18  changed "servicename='com.victronenergy.grid'," to "servicename='com.victronenergy.grid.cgwacs_ttyUSB0_di30_mb1',"
 2022-05-29  removed number format for '/Ac/Lx/Power' to finally get this code running!
+2022-06-05  added unit to all parameters like V, A, kWh
 
 """
 from gi.repository import GLib
@@ -158,7 +159,6 @@ def decode_speedwire(data):
 
 
 class DbusDummyService(object):
-    #def __init__(self, servicename, deviceinstance, paths, productname='SMA Sunny Home Manager 2.0', connection='/dev/ttyUSB0'):
     def __init__(self, servicename, deviceinstance, paths, productname='SMA Sunny Home Manager 2.0', connection='/dev/ttyUSB0'):
         self._dbusservice = VeDbusService(servicename)
         self._paths = paths
@@ -178,10 +178,37 @@ class DbusDummyService(object):
         self._dbusservice.add_path('/HardwareVersion', 0)
         self._dbusservice.add_path('/Connected', 1)
         
+        _kwh = lambda p, v: (str(v) + 'kWh')
+        _a = lambda p, v: (str(v) + 'A')
+        _w = lambda p, v: (str(v) + 'W')
+        _v = lambda p, v: (str(v) + 'V')
+        _s = lambda p, v: (str(v) + 's')
+        _x = lambda p, v: (str(v))
+
+        self._dbusservice.add_path('/Ac/Energy/Forward', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/Energy/Reverse', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L1/Current', None, gettextcallback=_a)
+        self._dbusservice.add_path('/Ac/L1/Energy/Forward', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L1/Energy/Reverse', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L1/Power', None, gettextcallback=_w)
+        self._dbusservice.add_path('/Ac/L1/Voltage', None, gettextcallback=_v)
+        self._dbusservice.add_path('/Ac/L2/Current', None, gettextcallback=_a)
+        self._dbusservice.add_path('/Ac/L2/Energy/Forward', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L2/Energy/Reverse', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L2/Power', None, gettextcallback=_w)
+        self._dbusservice.add_path('/Ac/L2/Voltage', None, gettextcallback=_v)
+        self._dbusservice.add_path('/Ac/L3/Current', None, gettextcallback=_a)
+        self._dbusservice.add_path('/Ac/L3/Energy/Forward', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L3/Energy/Reverse', None, gettextcallback=_kwh)
+        self._dbusservice.add_path('/Ac/L3/Power', None, gettextcallback=_w)
+        self._dbusservice.add_path('/Ac/L3/Voltage', None, gettextcallback=_v)
+        self._dbusservice.add_path('/Ac/Power', None, gettextcallback=_w)
+        self._dbusservice.add_path('/Ac/Current', None, gettextcallback=_a)
+        self._dbusservice.add_path('/Ac/Voltage', None, gettextcallback=_v)
 
         for path, settings in self._paths.items():
-            self._dbusservice.add_path(
-                path, settings['initial'], writeable=True, onchangecallback=self._handlechangedvalue)
+            #self._dbusservice.add_path(path, settings['initial'], writeable=True, gettextcallback=self._gettext, onchangecallback=self._handlechangedvalue)
+            self._dbusservice.add_path(path, settings['initial'], writeable=True, onchangecallback=self._handlechangedvalue)
 
         GLib.timeout_add(1000, self._update)
 
@@ -197,26 +224,26 @@ class DbusDummyService(object):
         #print("Energy +   {0:7.1f} (21.8.0)  {1:7.1f} (41.8.0)  {2:7.1f} (61.8.0) kWh".format(EnergyForwardL1, EnergyForwardL2, EnergyForwardL3))
         #print("Energy -   {0:7.1f} (22.8.0)  {1:7.1f} (42.8.0)  {2:7.1f} (62.8.0) kWh".format(EnergyReverseL1, EnergyReverseL2, EnergyReverseL3))
         
-        if (PowerL1 * PowerL2 * PowerL3 != 0):
-            self._dbusservice['/Ac/L1/Voltage'] = '{0:0.2f}V'.format(VoltageL1)
-            self._dbusservice['/Ac/L2/Voltage'] = '{0:0.2f}V'.format(VoltageL2)
-            self._dbusservice['/Ac/L3/Voltage'] = '{0:0.2f}V'.format(VoltageL3)
-            self._dbusservice['/Ac/L1/Current'] = '{0:0.2f}A'.format(CurrentL1)
-            self._dbusservice['/Ac/L2/Current'] = '{0:0.2f}A'.format(CurrentL2)
-            self._dbusservice['/Ac/L3/Current'] = '{0:0.2f}A'.format(CurrentL3)
-            self._dbusservice['/Ac/L1/Power'] = PowerL1    # no format here!!!
-            self._dbusservice['/Ac/L2/Power'] = PowerL2    # no format here!!!
-            self._dbusservice['/Ac/L3/Power'] = PowerL3    # no format here!!!
-            self._dbusservice['/Ac/L1/Energy/Forward'] = '{0:0.2f}kWh'.format(EnergyForwardL1)
-            self._dbusservice['/Ac/L2/Energy/Forward'] = '{0:0.2f}kWh'.format(EnergyForwardL2)
-            self._dbusservice['/Ac/L3/Energy/Forward'] = '{0:0.2f}kWh'.format(EnergyForwardL3)
-            self._dbusservice['/Ac/L1/Energy/Reverse'] = '{0:0.2f}kWh'.format(EnergyReverseL1)
-            self._dbusservice['/Ac/L2/Energy/Reverse'] = '{0:0.2f}kWh'.format(EnergyReverseL2)
-            self._dbusservice['/Ac/L3/Energy/Reverse'] = '{0:0.2f}kWh'.format(EnergyReverseL3)
-            self._dbusservice['/Ac/Energy/Forward'] = '{0:0.2f}kWh'.format(EnergyForward)
-            self._dbusservice['/Ac/Energy/Reverse'] = '{0:0.2f}kWh'.format(EnergyReverse)
-            self._dbusservice['/Ac/Power'] = '{0:0.2f}W'.format(PowerTotal)  # positive: consumption, negative: feed into grid
-            self._dbusservice['/Ac/Current'] = '{0:0.2f}A'.format(CurrentL1 + CurrentL2 + CurrentL3)
+        if (PowerL1 * PowerL2 * PowerL3 != 0) and (PowerTotal < 20000):
+            self._dbusservice['/Ac/L1/Voltage'] = '{0:0.2f}'.format(VoltageL1)
+            self._dbusservice['/Ac/L2/Voltage'] = '{0:0.2f}'.format(VoltageL2)
+            self._dbusservice['/Ac/L3/Voltage'] = '{0:0.2f}'.format(VoltageL3)
+            self._dbusservice['/Ac/L1/Current'] = '{0:0.2f}'.format(CurrentL1)
+            self._dbusservice['/Ac/L2/Current'] = '{0:0.2f}'.format(CurrentL2)
+            self._dbusservice['/Ac/L3/Current'] = '{0:0.2f}'.format(CurrentL3)
+            self._dbusservice['/Ac/L1/Power'] = PowerL1    # must be floating point, no formated string here!!!
+            self._dbusservice['/Ac/L2/Power'] = PowerL2
+            self._dbusservice['/Ac/L3/Power'] = PowerL3
+            self._dbusservice['/Ac/L1/Energy/Forward'] = '{0:0.2f}'.format(EnergyForwardL1)
+            self._dbusservice['/Ac/L2/Energy/Forward'] = '{0:0.2f}'.format(EnergyForwardL2)
+            self._dbusservice['/Ac/L3/Energy/Forward'] = '{0:0.2f}'.format(EnergyForwardL3)
+            self._dbusservice['/Ac/L1/Energy/Reverse'] = '{0:0.2f}'.format(EnergyReverseL1)
+            self._dbusservice['/Ac/L2/Energy/Reverse'] = '{0:0.2f}'.format(EnergyReverseL2)
+            self._dbusservice['/Ac/L3/Energy/Reverse'] = '{0:0.2f}'.format(EnergyReverseL3)
+            self._dbusservice['/Ac/Energy/Forward'] = '{0:0.2f}'.format(EnergyForward)
+            self._dbusservice['/Ac/Energy/Reverse'] = '{0:0.2f}'.format(EnergyReverse)
+            self._dbusservice['/Ac/Power'] = PowerTotal  # positive: consumption, negative: feed into grid
+            self._dbusservice['/Ac/Current'] = '{0:0.2f}'.format(CurrentL1 + CurrentL2 + CurrentL3)
         logging.info("House Consumption: %sW" % (PowerTotal))
         return True
 
@@ -224,6 +251,11 @@ class DbusDummyService(object):
         logging.debug("someone else updated %s to %s" % (path, value))
         return True # accept the change
 
+    def _gettext(self, path, value):
+        item = self._summeditems.get(path)
+        if item is not None:
+            return item['gettext'] % value
+        return value
 
 # === All code below is to simply run it from the commandline for debugging purposes ===
 
@@ -248,25 +280,6 @@ def main():
         servicename='com.victronenergy.grid.SMAHomeManager',   # add what you want here, but not just 'com.victronenergy.grid', also 'com.victronenergy.grid.X' works
         deviceinstance=0,
         paths={
-          '/Ac/Power': {'initial': 0},
-          '/Ac/Current': {'initial': 0},
-          '/Ac/L1/Voltage': {'initial': 0},
-          '/Ac/L2/Voltage': {'initial': 0},
-          '/Ac/L3/Voltage': {'initial': 0},
-          '/Ac/L1/Current': {'initial': 0},
-          '/Ac/L2/Current': {'initial': 0},
-          '/Ac/L3/Current': {'initial': 0},
-          '/Ac/L1/Power': {'initial': 0},
-          '/Ac/L2/Power': {'initial': 0},
-          '/Ac/L3/Power': {'initial': 0},
-          '/Ac/L1/Energy/Forward': {'initial': 0},
-          '/Ac/L2/Energy/Forward': {'initial': 0},
-          '/Ac/L3/Energy/Forward': {'initial': 0},
-          '/Ac/L1/Energy/Reverse': {'initial': 0},
-          '/Ac/L2/Energy/Reverse': {'initial': 0},
-          '/Ac/L3/Energy/Reverse': {'initial': 0},
-          '/Ac/Energy/Forward': {'initial': 0}, # energy bought from the grid
-          '/Ac/Energy/Reverse': {'initial': 0}, # energy sold to the grid
         })
 
     logging.info('Connected to dbus, and switching over to GLib.MainLoop() (= event based)')
