@@ -19,9 +19,6 @@ import os
 import logging
 import socket
 import struct
-
-# our own packages
-sys.path.insert(1, os.path.join(os.path.dirname(__file__), '../ext/velib_python'))
 from vedbus import VeDbusService
 
 # ip for SMA Sunny Home Manager 2.0
