@@ -2,7 +2,7 @@
 
 ## Attention
 
-Work in progress: This Python code was NOT tested with any Victron Energe hardware at all! Use this code only for testing and on your own risk!!! 
+Work in progress: This Python code was NOT tested with any Victron Energy hardware at all! Use this code only for testing and on your own risk!!! 
 
 ## Overview
 
