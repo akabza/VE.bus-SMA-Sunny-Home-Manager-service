@@ -34,7 +34,7 @@ Fifth, start and test this Python code. If everything works, electric power from
 Via speedwire communication all data are read from the SHM and transfered to the D-Bus. This Python-Code runs on the Raspberry Pi where Venus OS is installed and running. 
 
 As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
-![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
+![grafik](https://user-images.githubusercontent.com/99689771/172181418-8fe93226-d594-482e-9734-b62cdc7a41ae.png)
 
 By selecting the SMA SHM device, e.g. this parameters are visible: 
 ![grafik](https://user-images.githubusercontent.com/99689771/172180408-aee7bfd6-809f-4100-bc0d-a558abf16c44.png)
