@@ -8,9 +8,6 @@ Sean Mitchell realized a very similar project in Go https://github.com/mitchese/
 
 This Python-Code is based on https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py and translates the SHM data received via speedwire to the VE.bus. More information on D-Bus API definition here: https://github.com/victronenergy/venus/wiki/dbus-api
 
-SMA PV converters are supported by Venus OS and automtically visible in the Venus OS main screen, e.g. like this:
-![2022-05-30_Venus_OS_Test](https://user-images.githubusercontent.com/99689771/171047952-95c60e9f-fc03-44d5-b87f-5d3e2942a8ad.png)
-
 To install an AC connected electric energy storage (ESS) with VE components, an Energy Meter is required. Unfurtunately the SMA Energy Meter called SunnyHomeManager 2.0 (SHM) is not supported by Venus OS. This Python code allows to use the data from an existing SMA SHM within Venus OS.
 
 ## Installation of dummy environment
@@ -24,11 +21,13 @@ Enter the IP of your Respberry Pi running Venus OS, then you see this screen fir
 Second, you need to establish root access to Venus OS first, see https://www.victronenergy.com/live/ccgx:root_access. If this was successful, you can directly work with the terminal, which may look like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/172068413-b32dc07e-ddc8-41b7-a9d0-e18b993ee456.png)
 
-Third, you may want to scan for an existing PV inverter (or any other existing harware). Go to Settings -> PV inverter -> Scan. If this was successful, your PV inverter is visible on the Venus OS device list.
+Third, you may want to scan for an existing PV inverter (or any other existing harware). Go to Settings -> PV inverter -> Scan. If this was successful, your PV inverter is visible on the Venus OS device list and the Venus OS main screen may look like this:
+![grafik](https://user-images.githubusercontent.com/99689771/172179033-5d211217-5d94-479f-961e-b042b2eee04b.png)
 
 Forth, you need to copy this Python code to your Raspberry Pi running Venus OS. Also copy vedbus.py and ve_utils.py from this link: https://github.com/victronenergy/velib_python into your (roots) home directory /root/home. 
 
-Fifth, start and test this Python code. 
+Fifth, start and test this Python code. If everything works, electric power from the SMA SHM electric grid meter is shown in the Venus OS main screen, red window AC Input. Also the AC Loads are calculated and displayed in the green window, e.g. like this:
+![grafik](https://user-images.githubusercontent.com/99689771/172180161-d3f181e0-1fad-4c67-b23d-f95d5472e883.png)
 
 ## How it works
 
@@ -37,7 +36,8 @@ Via speedwire communication all data are read from the SHM and transfered to the
 As soon as this Python code is running, the SMA SHM is listed in the Venus OS Device List, e.g. like this:
 ![grafik](https://user-images.githubusercontent.com/99689771/170887921-95d5f11c-5d39-4c7b-bace-c404df5d5f12.png)
 
-![grafik](https://user-images.githubusercontent.com/99689771/171054562-928e803c-028d-467d-8895-cd2f3e4f181d.png)
+By selecting the SMA SHM device, e.g. this parameters are visible: 
+![grafik](https://user-images.githubusercontent.com/99689771/172180408-aee7bfd6-809f-4100-bc0d-a558abf16c44.png)
 
 The measured electric power on the individual three phases are visible on the Venus OS main screen!
 
@@ -50,7 +50,3 @@ Voltage    231.529 (32.4.0)  232.207 (52.4.0)  232.865 (72.4.0) V<br>
 Energy +    XX12.5 (21.8.0)   XX38.1 (41.8.0)   XX27.9 (61.8.0) kWh<br>
 Energy -    XX02.2 (22.8.0)   XX22.4 (42.8.0)   XX08.4 (62.8.0) kWh<br>
 INFO:root:House Consumption: 531.1
-
-## OPEN ISSUE
-
-I still don´t know how to handle the physical units like Volt, Ampere or Watt. For all values on the VE.dbus units are allowed, but not for the power values of L1, L2, and L3. If I add the unit Watt here, this code does not work any more. Any idea how to solve this???
